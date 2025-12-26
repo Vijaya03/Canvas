@@ -5,7 +5,6 @@ wss.on('connection',(socket)=>{
     console.log('Client connected');
     socket.on('message',(raw)=>{
         const message = JSON.parse(raw.toString());
-
         // Join Room
         if(message.type === 'JOIN_ROOM'){
             const {roomId} = message;
@@ -35,7 +34,7 @@ wss.on('connection',(socket)=>{
         console.log('Client disconnected');
         const roomId = socket.roomId;
         if(roomId && rooms.has(roomId)){
-            rooms.get(roomsId).delete(socket);
+            rooms.get(roomId).delete(socket);
             if(rooms.get(roomId).size ===0){
                 rooms.delete(roomId)
             }
